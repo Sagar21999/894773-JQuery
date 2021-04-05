@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+    var resultLines = $("#ta2");
+    var result = "";
+    var btn = $("#btn");
+
+    btn.click(() => {
+
+        var para = $("textarea#ta1").val()
+        var lines = para.split("\n");
+        //console.log(para);
+        var keywords = $("#words").val().split(",");
+        //console.log(lines);
+        //console.log(keywords);
+        keywords.forEach(element => {
+            //result="";
+            lines.forEach(line => {
+                var line1 = "";
+                if (line.includes(element)) {
+                    var words = line.split(" ");
+                    //console.log(element);
+                    words.forEach(key => {
+                        //console.log(key);
+                        //console.log(element);
+                        if (key.includes(element) && (key.length === element.length)) {
+                            line1 = line1 + "<b>" + key + "</b> "
+                        }
+                        else {
+                            line1 = line1 + key + " ";
+                        }
+                        //console.log(line1);
+                    })
+
+                    result = result + "\n" + line1;
+                    // console.log(result);
+                }
+            });
+        });
+        resultLines.text(result);
+    })
+})
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <p>Search lines for:</p><br />
+    <input style=" width: 30%;" type="text" id="words"><br />
+    <button id="btn">Search</button>
+    <p>Type Text:</p>
+    <textarea type="text" id="ta1" rows="10"></textarea><br />
+    <p>Lines Containing Text</p><br />
+    <textarea id="ta2" rows="10"></textarea>
+</body>
+</body>
+</html>
